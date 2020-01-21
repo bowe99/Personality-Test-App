@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './results.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget{
 
 class _MyAppState extends State{ // Leading _ restricts the us of MyAppState to the same folder
   var _questionIndex = 0;        // Making the variable private can't be used anywhere else than the same file
-  final questions = const [
+  final _questions = const [
       {'questionText': 'What\'s your favorite country in the list bellow?',
        'answers': ['Canada', 'USA', 'Russia', 'China']
       },
@@ -39,17 +39,9 @@ class _MyAppState extends State{ // Leading _ restricts the us of MyAppState to 
       home: Scaffold(
         appBar: AppBar(title: Text('My First App'),
         ),
-        body: _questionIndex < questions.length 
-          ? Column(
-            children: <Widget>[
-            Question(questions[_questionIndex]['questionText']),
-            ...(questions[_questionIndex]['answers'] as List<String>).map((answer){
-              return AnswerButton(answer, _answerQuestion);
-            }).toList()
-           ],
-          ): Center(
-                child: Text('You Did it'),
-          )
+        body: _questionIndex < _questions.length 
+          ? Quiz(answerQuestion: _answerQuestion, questions: _questions, questionIndex: _questionIndex) 
+          : Results()
       ),
     );
     
