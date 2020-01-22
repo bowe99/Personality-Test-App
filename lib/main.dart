@@ -26,6 +26,14 @@ class _MyAppState extends State{ // Leading _ restricts the us of MyAppState to 
       }
     ];
   
+  void _resetQuiz(){
+    setState(() {
+      _questionIndex = 0;
+      _resultQuestions = [];
+    });
+
+  }
+
   void _answerQuestion(){
       setState(() {
       _questionIndex++;
@@ -50,7 +58,7 @@ class _MyAppState extends State{ // Leading _ restricts the us of MyAppState to 
               questionIndex: _questionIndex,
               results: _resultQuestions,
             ) 
-          : Results(_resultQuestions)
+          : Results(_resultQuestions, _resetQuiz)
       ),
     );
     

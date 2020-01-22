@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class Results extends StatelessWidget {
   final List<String> results;
-  Results(this.results);  
+  final Function resetQuiz;
+  Results(this.results, this.resetQuiz);  
 
   String determinePersonality(List<String> result){
     List<String> qualities = [];
@@ -58,10 +59,25 @@ class Results extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-                child: Text(
-                  determinePersonality(results),
-                  style: TextStyle(fontSize: 28),
-                  ),   
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                    Text(
+                      determinePersonality(results),
+                      style: TextStyle(
+                        fontSize: 28),
+                      textAlign: TextAlign.center,
+                      ),
+                    FlatButton(
+                      child: Text(
+                        'Restart Quiz',
+                        style: TextStyle(color: Colors.blue),),
+                      onPressed: resetQuiz,
+
+                    )
+                    ]
+                ),   
             );
   }
 }
